@@ -5,23 +5,16 @@ class EventPractice extends Component {
     message: ''
   }
 
-  constructor(props) {
-    super(props);
-    //함수가 호출될 때 this는 호출부에 따라 결정
-    //this를 컴포넌트 자신으로 제대로 가르키기 위해서는
-    //메서드를 this와 바인딩하는 작업이 필요
-    //만약 바인딩하지 않는 경우라면 this는 undefined를 나타냄.
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleChange(e) {
+  //메서드 바인딩은 생성자 메서드에서 하는 것이 정석이지만,
+  //바벨의 transform-class-properties 문법을 사용하여
+  //화살표 함수 형태로 메서드를 정의하여 간단하게 표현
+  handleChange = (e) => {
     this.setState({
       message: e.target.value
     });
   }
 
-  handleClick() {
+  handleClick = (e) => {
     alert(this.state.message);
     this.setState({
       message: ''
