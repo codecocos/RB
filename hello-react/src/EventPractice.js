@@ -2,21 +2,21 @@ import React, { Component } from 'react'
 
 class EventPractice extends Component {
   state = {
+    username: '',
     message: ''
   }
 
-  //메서드 바인딩은 생성자 메서드에서 하는 것이 정석이지만,
-  //바벨의 transform-class-properties 문법을 사용하여
-  //화살표 함수 형태로 메서드를 정의하여 간단하게 표현
   handleChange = (e) => {
     this.setState({
-      message: e.target.value
+      //객체 안에서 key를 []로 감싸면 그 안에 넣은 레퍼런스가 가리키는 실제 값이 key값으로 사용된다..
+      [e.target.name]: e.target.value
     });
   }
 
   handleClick = (e) => {
-    alert(this.state.message);
+    alert(this.state.username + ':' + this.state.message);
     this.setState({
+      username: '',
       message: ''
     });
   }
@@ -25,6 +25,13 @@ class EventPractice extends Component {
     return (
       <div>
         <h1>이벤트 연습</h1>
+        <input
+          type='text'
+          name='username'
+          placeholder='사용자명'
+          value={this.state.username}
+          onChange={this.handleChange}
+        />
         <input
           type='text'
           name='message'
