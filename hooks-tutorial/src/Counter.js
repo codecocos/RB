@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 const Counter = () => {
-
   //상태의 기본값
   const [value, setValue] = useState(0);
 
