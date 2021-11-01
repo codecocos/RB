@@ -2,14 +2,18 @@
 
 # dependencies
 hello-react/node_modules
+hooks-tutorial/node_modules
 hello-react/.pnp
+hooks-tutorial/.pnp
 .pnp.js
 
 # testing
 hello-react/coverage
+hooks-tutorial/coverage
 
 # production
 hello-react/build
+hooks-tutorial/build
 
 # misc
 .DS_Store
