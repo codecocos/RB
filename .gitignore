@@ -6,11 +6,13 @@ hooks-tutorial/node_modules
 todo-app/node_modules
 immer-tutorial/node_modules
 router-tutorial/node_modules
+news-viewer/node_modules
 hello-react/.pnp
 hooks-tutorial/.pnp
 todo-app/.pnp
 immer-tutorial/.pnp
 router-tutorial/.pnp
+news-viewer/.pnp
 .pnp.js
 
 # testing
@@ -19,6 +21,7 @@ hooks-tutorial/coverage
 todo-app/coverage
 immer-tutorial/coverage
 router-tutorial/coverage
+news-viewer/coverage
 
 # production
 hello-react/build
@@ -26,6 +29,7 @@ hooks-tutorial/build
 todo-app/build
 immer-tutorial/build
 router-tutorial/build
+news-viewer/build
 
 
 # misc
