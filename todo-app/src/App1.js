@@ -3,26 +3,28 @@ import TodoInsert from "./components/TodoInsert";
 import TodoList from "./components/TodoList";
 import TodoTemplate from "./components/TodoTemplate";
 
-function createBulkTodos() {
-  const array = [];
-  for (let i = 0; i <= 2500; i++) {
-    array.push({
-      id: i,
-      text: `할 일 ${i}`,
-      checked: false,
-    });
-  }
-  return array;
-}
-
 const App = () => {
-  //파라미터를 함수를 함수 형태로 넣어주면 컴포넌트가 처음 렌더링될 때만 실행됨.
-  //만약 (createBulkTodos()) 작성하면 리렌더링 될 때마다 createBulkTodos 함수가 호출 됨.
-  const [todos, setTodos] = useState(createBulkTodos);
+  const [todos, setTodos] = useState([
+    {
+      id: 1,
+      text: '리액트의 기초 알아보기',
+      checked: true,
+    },
+    {
+      id: 2,
+      text: '컴포넌트 스타일링 해보기',
+      checked: true,
+    },
+    {
+      id: 3,
+      text: '일정 관리 앱 만들어 보기',
+      checked: false,
+    },
+  ]);
 
   //고윳값으로 사용될 id(렌더링 될 정보가 아님.)
   //ref를 사용하영 변수 담기
-  const nextId = useRef(2501);
+  const nextId = useRef(4);
 
   const onInsert = useCallback(
     text => {
@@ -40,21 +42,19 @@ const App = () => {
 
   const onRemove = useCallback(
     id => {
-      //setTodos(todos.filter(todo => todo.id !== id));
-      setTodos(todos => todos.filter(todo => todo.id !== id));
+      setTodos(todos.filter(todo => todo.id !== id));
     },
-    //빈 배열
-    []
+    [todos]
   )
 
   const onToggle = useCallback(
     id => {
-      setTodos(todos =>
+      setTodos(
         todos.map(todo =>
           todo.id === id ? { ...todo, checked: !todo.checked } : todo),
       );
     },
-    [],
+    [todos],
   );
 
   return (
@@ -67,12 +67,3 @@ const App = () => {
 }
 
 export default App;
-
-// //useState 함수형 업데이트
-// const [number, setNumber] = useState(0);
-// //prevNumbers는 현재 number값을 가리킵니다.
-// const onIncrease = useCallback(
-//   //어떻게 업데이트할지 정의해 주는 업데이트함수
-//   () => setNumber(prevNumber => prevNumber + 1),
-//   [],
-// );
