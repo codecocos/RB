@@ -3,17 +3,22 @@
 # dependencies
 hello-react/node_modules
 hooks-tutorial/node_modules
+todo-app/node_modules
 hello-react/.pnp
 hooks-tutorial/.pnp
+todo-app/.pnp
 .pnp.js
 
 # testing
 hello-react/coverage
 hooks-tutorial/coverage
+todo-app/coverage
 
 # production
 hello-react/build
 hooks-tutorial/build
+todo-app/build
+
 
 # misc
 .DS_Store
