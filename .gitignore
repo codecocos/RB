@@ -4,20 +4,24 @@
 hello-react/node_modules
 hooks-tutorial/node_modules
 todo-app/node_modules
+immer-tutorial/node_modules
 hello-react/.pnp
 hooks-tutorial/.pnp
 todo-app/.pnp
+immer-tutorial/.pnp
 .pnp.js
 
 # testing
 hello-react/coverage
 hooks-tutorial/coverage
 todo-app/coverage
+immer-tutorial/coverage
 
 # production
 hello-react/build
 hooks-tutorial/build
 todo-app/build
+immer-tutorial/build
 
 
 # misc
