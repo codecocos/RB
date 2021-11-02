@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from "react";
+import React, { useCallback, useReducer, useRef } from "react";
 import TodoInsert from "./components/TodoInsert";
 import TodoList from "./components/TodoList";
 import TodoTemplate from "./components/TodoTemplate";
@@ -15,10 +15,33 @@ function createBulkTodos() {
   return array;
 }
 
+//useReducer : 상태를 업데이트하는 로직을 모아서 컴포넌트 바깥에 둘 수 있는 것이 장점.
+function todoReducer(todos, action) {
+  switch (action.type) {
+    //새로추가
+    case 'INSERT':
+      //{type:'INSERT',todo:{id:1,text:'todo',checked:false}}
+      return todos.concat(action.todo);
+    //제거
+    case 'REMOVE':
+      //{type:'REMOVE',id:1}
+      return todos.filter(todo => todo.id !== action.id);
+    //토글
+    case 'TOGGLE':
+      //{type:'REMOVE',id:1}
+      return todos.map(todo =>
+        todo.id === action.id ? { ...todo, checked: !todo.checked } : todo,
+      );
+    default:
+      return todos;
+  }
+}
+
 const App = () => {
-  //파라미터를 함수를 함수 형태로 넣어주면 컴포넌트가 처음 렌더링될 때만 실행됨.
-  //만약 (createBulkTodos()) 작성하면 리렌더링 될 때마다 createBulkTodos 함수가 호출 됨.
-  const [todos, setTodos] = useState(createBulkTodos);
+  //원래 두 번째 파라미터에 초기 상태를 넣어주지만, 
+  //undefined를 넣고, 세 번째 파라미터에 초기상태 만들어주는 함수를 넣어주어
+  //맨처음 렌더링 될 때만 createBulkTodos 함수가 호출되도록 함.
+  const [todos, dispatch] = useReducer(todoReducer, undefined, createBulkTodos);
 
   //고윳값으로 사용될 id(렌더링 될 정보가 아님.)
   //ref를 사용하영 변수 담기
@@ -31,31 +54,24 @@ const App = () => {
         text,
         checked: false,
       };
-      setTodos(todos.concat(todo));
+      dispatch({ type: 'INSERT', todo })
       //nextId 1씩 더하기
       nextId.current += 1;
     },
-    [todos]
+    []
   );
 
   const onRemove = useCallback(
     id => {
-      //setTodos(todos.filter(todo => todo.id !== id));
-      setTodos(todos => todos.filter(todo => todo.id !== id));
+      dispatch({ type: 'REMOVE', id })
     },
-    //빈 배열
     []
   )
 
   const onToggle = useCallback(
     id => {
-      setTodos(todos =>
-        todos.map(todo =>
-          todo.id === id ? { ...todo, checked: !todo.checked } : todo),
-      );
-    },
-    [],
-  );
+      dispatch({ type: 'TOGGLE', id });
+    }, []);
 
   return (
     <TodoTemplate>
@@ -67,12 +83,3 @@ const App = () => {
 }
 
 export default App;
-
-// //useState 함수형 업데이트
-// const [number, setNumber] = useState(0);
-// //prevNumbers는 현재 number값을 가리킵니다.
-// const onIncrease = useCallback(
-//   //어떻게 업데이트할지 정의해 주는 업데이트함수
-//   () => setNumber(prevNumber => prevNumber + 1),
-//   [],
-// );
