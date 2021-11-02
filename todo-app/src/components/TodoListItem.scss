@@ -1,12 +1,21 @@
+.TodoListItem-virtualized {
+  & + & {
+    border-top: 1px solid #dee2e6;
+  }
+  &:nth-child(even) {
+    background: #f8f9fa;
+  }
+}
+
 .TodoListItem {
   padding: 1rem;
   display: flex;
   //세로중앙정렬
   align-items: center;
-  //특정 순번이나 홀수, 짝수 요소에만 스타일을 부여
-  &:nth-child(even) {
-    background: #92b2d3;
-  }
+  // //특정 순번이나 홀수, 짝수 요소에만 스타일을 부여
+  // &:nth-child(even) {
+  //   background: #92b2d3;
+  // }
   .checkbox {
     cursor: pointer;
     //차지할 수 있는 영역 모두 차지
@@ -44,7 +53,7 @@
     }
   }
   //엘리먼트 사이사이에 테두리를 넣어줌
-  & + & {
-    border-top: 1px solid #dee2e6;
-  }
+  // & + & {
+  //   border-top: 1px solid #dee2e6;
+  // }
 }
