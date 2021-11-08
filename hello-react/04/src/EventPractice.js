@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const EventPractice = () => {
   const [form, setForm] = useState({
     username: '',
-    message: ''
+    message: '',
   });
   const { username, message } = form;
 
